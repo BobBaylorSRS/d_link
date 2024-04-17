@@ -19,20 +19,24 @@ File (note) names start with a two-letter code indicating what kind of note it i
 - po: post event
 
 ## Template invocation
-- while editing a note that will be the parent (old) note
-- command pallet / Templater: Create New Note From Template
-- select d_link from the drop-down list
-- select a two-letter code
+- while editing a note that will be the parent (old) note.
+- command pallet / Templater: Create New Note From Template.
+- select d_link from the drop-down list.
+- select a two-letter code.
+  
 A new note will be created with a little boilerplate and a link to the parent note. The parent note will have a link to the new note.
 
 ## Alternate invocation
-When presented with the drop-down list of two-letter codes
-- press escape (back button on Android)
-- enter a custom comma-separated text for a prefix code and suffix text (prefix,suffix)
-The new name will be in the form "prefix date suffix"
+When presented with the drop-down list of two-letter codes.
+- press escape (back button on Android).
+- enter a custom comma-separated text for a prefix code and suffix text (prefix,suffix).
+
+The new name will be in the form "prefix date suffix". Any prefix and sufix text is allowed (within the rules of file naming) in this alternate invocation - but the date will always be there. 
+
+If the alternate entry is entirely blank, then the new note will be named "ef date" (ef for ephemeral)
 
 ## My Obsidian Setup
-- New notes are created in the same folder as the current note (Settings/Files and links/Default location for new notes)
-- The Templates Core plug-in is **dis-abled**
-- Templater community plug-in is installed and enabled
-- This template (d_link.md) is in the Templater template folder
+- New notes are created in the same folder as the current note (Settings/Files and links/Default location for new notes).
+- The Templates Core plug-in is **dis-abled**.
+- Templater community plug-in is installed and enabled.
+- This template (d_link.md) is in the Templater template folder.
