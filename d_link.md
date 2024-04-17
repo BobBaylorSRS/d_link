@@ -1,9 +1,9 @@
 
-
 [[<% app.workspace.lastActiveFile.basename %>]]
 
 
 ## Punch list
+
 
 
 <%*
@@ -33,7 +33,7 @@ let suffix_text = "";
 // If user hit `Escape` key (`back` button on mobile)
 // then input the comma-separated prefix and suffix
 if (!prefix_text) {
-  custom_text = await tp.system.prompt("Type custom prefix");
+  custom_text = await tp.system.prompt("Custom prefix, suffix");
   split_text = custom_text.split(",");
   prefix_text = split_text[0];
   if (!prefix_text) {
@@ -46,15 +46,22 @@ if (!prefix_text) {
   }
 }
 // Rename the new file
-const new_file_name = prefix_text.trim() + ' ' + today_text + ' ' + suffix_text.trim();
-const link_to_new = "\n[["+new_file_name+"]]\n";
-await tp.file.rename(new_file_name);
+const new_file_name = [prefix_text.trim(), today_text, suffix_text.trim()].join(' ');
 
-// Insert a link to the new file into the most recent active file
-const note = tp.file.find_tfile(`${prev_file_name}.md`);
-const insertedContent = `\n\nchild note is [[${new_file_name}]]\n\n`;
-const fileContent = await app.vault.read(note);
+const b_file_exists = await tp.file.exists(tp.file.folder(false) + "/" + new_file_name + ".md")
+if(b_file_exists) {
+	await tp.system.prompt('Abort! "' + new_file_name + '" already exists!');
+	}
+else {
+	await tp.file.rename(new_file_name);
 
-const updatedContent = fileContent +`${insertedContent}`;
-await app.vault.modify(note, updatedContent);
+	// Insert a link to the new file into the most recent active file
+	const link_to_new = "\n[["+new_file_name+"]]\n";
+	const note = tp.file.find_tfile(`${prev_file_name}.md`);
+	const insertedContent = `\n\nchild note is [[${new_file_name}]]\n\n`;
+	const fileContent = await app.vault.read(note);
+
+	const updatedContent = fileContent +`${insertedContent}`;
+	await app.vault.modify(note, updatedContent);
+	}
 -%>
